@@ -10,7 +10,7 @@ OBJS		=	$(addprefix build/, $(_OBJS))
 OBJS_DEPEND	=	${OBJS:.o=.d}
 
 CXX			=	clang++
-CXXFLAGS	=   -Wall -Wextra -Werror
+CXXFLAGS	=   -Wall -Wextra -Werror -std=c++20
 INCLUDE		=	-I includes/
 
 all		:	$(NAME)

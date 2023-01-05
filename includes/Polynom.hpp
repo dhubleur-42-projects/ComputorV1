@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:43:45 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 14:54:52 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:49:11 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,17 @@ public:
 
 	Polynom &operator=(Polynom const &rhs);
 
+	bool isValid() const;
+	void print() const;
+	void reduce();
+
 private:
 	std::vector<std::pair<double, double>> _factors;
+	bool _valid;
+
+	std::pair<double, double> _extractFactor(std::string &factorsList);
+	std::pair<double, double> _extractValues(std::string &factor);
+	void _extractValue(std::string factor, std::pair<double, double> &values);
 };
 
 #endif

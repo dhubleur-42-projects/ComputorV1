@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:44:20 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:47:35 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,9 @@ void Polynom::print() const
 	{
 		if (i > 0)
 		{
-			std::cout << (factor.first >= 0 ? " + " : " - ");
+			std::cout << " ";
 		}
+		std::cout << (factor.first >= 0 ? "+ " : "- ");
 		std::cout << (factor.first < 0 ? -factor.first : factor.first);
 		if (factor.second > 0)
 			std::cout << " * X";

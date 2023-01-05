@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:23:22 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:40:25 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ void Polynom::_extractValue(std::string factor, std::pair<double, double> &value
 	size_t x = factor.find("X^");
 	std::string nbr = factor;
 	int valueType = x == std::string::npos ? 0 : 1;
-	if (x != std::string::npos)
+	if (x == std::string::npos)
+	{
+		x = factor.find("X");
+		if (x != std::string::npos)
+		{
+			valueType = 1;
+			nbr = "1";
+		}
+	}
+	else
 		nbr = factor.substr(x + 2, factor.size() - x - 2);
 	size_t pos = 0;
 	if (nbr[0] == '-' || nbr[0] == '+')
@@ -48,7 +57,11 @@ void Polynom::_extractValue(std::string factor, std::pair<double, double> &value
 		if (valueType == 0)
 			values.first = value;
 		else
+		{
+			if (factor[0] == '-')
+				values.first = -1;
 			values.second = value;
+		}
 	}
 }
 
@@ -74,6 +87,8 @@ std::pair<double, double> Polynom::_extractFactor(std::string &factorsList)
 	size_t plus = factorsList.find("+", 1);
 	size_t minus = factorsList.find("-", 1);
 	size_t x = factorsList.find("X^");
+	if (x == std::string::npos)
+		x = factorsList.find("X");
 	if (x != std::string::npos && (plus == x + 2))
 		plus = std::string::npos;
 	else if (x != std::string::npos && (minus == x + 2))
@@ -111,8 +126,6 @@ void Polynom::_testDegree()
 		_valid = false;
 		std::cerr << "Invalid equation (degree must be an integer)" << std::endl;
 	}
-	if (_factors.back().second > _degree)
-		_degree = _factors.back().second;
 }
 
 Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
@@ -140,6 +153,7 @@ Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 		_factors.push_back(factor);
 		_testDegree();
 	}
+	this->reduce();
 }
 
 Polynom::Polynom(Polynom const &src) { *this = src; }
@@ -165,7 +179,11 @@ void Polynom::print() const
 		{
 			std::cout << (factor.first >= 0 ? " + " : " - ");
 		}
-		std::cout << (factor.first < 0 ? -factor.first : factor.first) << " * X^" << factor.second;
+		std::cout << (factor.first < 0 ? -factor.first : factor.first);
+		if (factor.second > 0)
+			std::cout << " * X";
+		if (factor.second > 1)
+			std::cout << "^" << factor.second;
 		i++;
 	}
 	std::cout << " = 0" << std::endl;
@@ -189,7 +207,11 @@ void Polynom::reduce()
 			search->first += factor.first;
 		}
 	}
+	auto new_end = std::remove_if(reduced.begin(), reduced.end(), [](std::pair<double, double> factor)
+								  { return (factor.first == 0); });
+	reduced.erase(new_end, reduced.end());
 	_factors = reduced;
+	_degree = _factors.back().second;
 }
 
 int Polynom::getDegree() const { return _degree; }

@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:41:56 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:21:24 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:39:03 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int main(int argc, char **argv)
 	Polynom p = Polynom(std::string(argv[1]));
 	if (!p.isValid())
 		return (1);
-	p.reduce();
 	std::cout << "Reduced form: ";
 	p.print();
 	std::cout << "Poylnomial degree: " << p.getDegree() << std::endl;

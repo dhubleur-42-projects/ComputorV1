@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:47:35 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:54:16 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 Polynom::Polynom() : _valid(true), _degree(-1) {}
 
-void Polynom::_extractValue(std::string factor, std::pair<double, double> &values)
+int Polynom::_extractValue(std::string factor, std::pair<double, double> &values)
 {
 	size_t x = factor.find("X^");
 	std::string nbr = factor;
@@ -50,6 +50,7 @@ void Polynom::_extractValue(std::string factor, std::pair<double, double> &value
 	{
 		std::cerr << "Invalid equation ('" << nbr << "' is not a number)" << std::endl;
 		_valid = false;
+		return -1;
 	}
 	else
 	{
@@ -62,6 +63,7 @@ void Polynom::_extractValue(std::string factor, std::pair<double, double> &value
 				values.first = -1;
 			values.second = value;
 		}
+		return valueType;
 	}
 }
 
@@ -75,8 +77,13 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 	}
 	else
 	{
-		_extractValue(factor.substr(0, mult), values);
-		_extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
+		int part1 = _extractValue(factor.substr(0, mult), values);
+		int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
+		if (part1 == part2)
+		{
+			std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+			_valid = false;
+		}
 	}
 	return (values);
 }
@@ -179,18 +186,24 @@ void Polynom::print() const
 	int i = 0;
 	for (std::pair<double, double> factor : _factors)
 	{
+		if (i == 0 && factor.first < 0)
+			std::cout << "- ";
 		if (i > 0)
-		{
-			std::cout << " ";
-		}
-		std::cout << (factor.first >= 0 ? "+ " : "- ");
-		std::cout << (factor.first < 0 ? -factor.first : factor.first);
+			std::cout << (factor.first >= 0 ? " + " : " - ");
+		if (factor.first != 1 && factor.first != -1)
+			std::cout << (factor.first < 0 ? -factor.first : factor.first);
 		if (factor.second > 0)
-			std::cout << " * X";
+		{
+			if (factor.first != 1 && factor.first != -1)
+				std::cout << " * ";
+			std::cout << "X";
+		}
 		if (factor.second > 1)
 			std::cout << "^" << factor.second;
 		i++;
 	}
+	if (i == 0)
+		std::cout << "0";
 	std::cout << " = 0" << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:43:45 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:43:08 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:49:18 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ private:
 
 	std::pair<double, double> _extractFactor(std::string &factorsList);
 	std::pair<double, double> _extractValues(std::string &factor);
-	void _extractValue(std::string factor, std::pair<double, double> &values);
+	int _extractValue(std::string factor, std::pair<double, double> &values);
 	void _testDegree();
 };
 

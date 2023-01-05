@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/01/05 16:40:25 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:44:20 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 		std::pair<double, double> factor = _extractFactor(left);
 		_factors.push_back(factor);
 		_testDegree();
+		if (!_valid)
+			return;
 	}
 	while (right.size() > 0)
 	{
@@ -152,6 +154,8 @@ Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 		factor.first *= -1;
 		_factors.push_back(factor);
 		_testDegree();
+		if (!_valid)
+			return;
 	}
 	this->reduce();
 }

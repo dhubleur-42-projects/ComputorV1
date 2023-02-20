@@ -16,7 +16,7 @@ SecondDegreeEquation::SecondDegreeEquation(int a, int b, int c) : _a(a), _b(b), 
 	const int bSquare = b * b;
 	const int fourAC = 4 * a * c;
 	std::cout << "We can compute the discriminant with the following formula:" << std::endl;
-	std::cout << "delta = b^2 - 4ac  =>  delta = " << b << "^2 - 4 * " << a << " * " << c << "  =>  " << bSquare << (fourAC > 0 ? " - " : " + ") << (fourAC < 0 ? -fourAC : fourAC) << std::endl;
+	std::cout << "delta = b^2 - 4ac  =>  delta = " << b << "^2 - 4 * " << a << " * " << c << "  =>  delta = " << bSquare << " - " << (fourAC < 0 ? -fourAC : fourAC) << std::endl;
 	_delta = bSquare - fourAC;
 }
 

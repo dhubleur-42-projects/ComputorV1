@@ -13,6 +13,7 @@
 #include "SecondDegreeEquation.hpp"
 
 SecondDegreeEquation::SecondDegreeEquation(int a, int b, int c) : _a(a), _b(b), _c(c) {
+	std::cout << "We gonna use the Vieta's formulas to solve this equation. With this parameters: a=" << a << " | b=" << b << " | c=" << c << std::endl;
 	const int bSquare = b * b;
 	const int fourAC = 4 * a * c;
 	std::cout << "We can compute the discriminant with the following formula:" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:41:56 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 16:21:26 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:27:05 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int main(int argc, char **argv)
 	else
 	{
 		SecondDegreeEquation e = SecondDegreeEquation(p.getFactor(2), p.getFactor(1), p.getFactor(0));
+		std::cout << "Discriminant : " << e.getDelta() << std::endl;
+		e.solve();
 	}
 	return (0);
 }

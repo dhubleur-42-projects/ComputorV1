@@ -13,6 +13,8 @@
 #ifndef SecondDegreeEquation_HPP
 #define SecondDegreeEquation_HPP
 
+# include <iostream>
+
 class SecondDegreeEquation
 {
 public:
@@ -22,11 +24,16 @@ public:
 
 	SecondDegreeEquation &operator=(SecondDegreeEquation const &rhs);
 
+	double getDelta() const;
+
+	void solve() const;
+
 private:
 	SecondDegreeEquation();
 	int _a;
 	int _b;
 	int _c;
+	double _delta;
 };
 
 #endif

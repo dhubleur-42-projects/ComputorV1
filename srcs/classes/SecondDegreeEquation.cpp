@@ -48,21 +48,23 @@ void SecondDegreeEquation::solve() const
 	}
 	else if (_delta > 0)
 	{
+		//Real solutions
 		double root = squareRoot(_delta);
 		std::cout << "Square root of the discriminant: " << root << std::endl;
 		std::cout << "We can compute the two solutions with the following formulas:" << std::endl;
 		std::cout << "x = (-b ± sqrt(delta)) / 2a  =>  x = (-" << _b << " ± " << root << ") / 2 * " << _a << std::endl;
 		double x1 = ((double)-_b + root) / (2 * _a);
 		double x2 = ((double)-_b - root) / (2 * _a);
-		std::cout << "The solutions are: " << x1 << " and " << x2 << std::endl;
+		std::cout << "The solutions are: '" << x1 << "' and '" << x2 << "'" << std::endl;
 	}
 	else
 	{
+		//Complex solutions
 		double root = squareRoot(-_delta);
 		std::cout << "Square root of the discriminant: " << root << " * i" << std::endl;
 		std::cout << "We can compute the two solutions with the following formulas:" << std::endl;
 		std::cout << "x = (-b ± sqrt(delta)) / 2a  =>  x = (-" << _b << " ± " << root << " * i) / 2 * " << _a << std::endl;
 		const int doubleA = 2 * _a;
-		std::cout << "The solutions are: " << (_b + root)/doubleA << " * i/" << doubleA << " and " << (_b - root)/doubleA  << " * i/" << doubleA << std::endl;
+		std::cout << "The solutions are: '" << (_b + root)/doubleA << " * i/" << doubleA << "' and '" << (_b - root)/doubleA  << " * i/" << doubleA << "'" << std::endl;
 	}
 }

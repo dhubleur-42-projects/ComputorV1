@@ -1,8 +1,11 @@
 NAME		=	computor
 
 SRCS		=	main.cpp \
+				basic.cpp \
 				$(addprefix classes/, \
-					Polynom.cpp)
+					Polynom.cpp \
+					SecondDegreeEquation.cpp \
+				)
 				
 
 _OBJS		=	${SRCS:.cpp=.o}

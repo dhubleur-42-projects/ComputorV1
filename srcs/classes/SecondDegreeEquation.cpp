@@ -13,7 +13,11 @@
 #include "SecondDegreeEquation.hpp"
 
 SecondDegreeEquation::SecondDegreeEquation(int a, int b, int c) : _a(a), _b(b), _c(c) {
-	_delta = _b * _b - 4 * _a * _c;
+	const int bSquare = b * b;
+	const int fourAC = 4 * a * c;
+	std::cout << "We can compute the discriminant with the following formula:" << std::endl;
+	std::cout << "delta = b^2 - 4ac  =>  delta = " << b << "^2 - 4 * " << a << " * " << c << "  =>  " << bSquare << (fourAC > 0 ? " - " : " + ") << (fourAC < 0 ? -fourAC : fourAC) << std::endl;
+	_delta = bSquare - fourAC;
 }
 
 SecondDegreeEquation::SecondDegreeEquation(SecondDegreeEquation const &src) : _a(src._a), _b(src._b), _c(src._c), _delta(src._delta) {}

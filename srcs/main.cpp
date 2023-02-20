@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:41:56 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 16:27:05 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:53:53 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ int main(int argc, char **argv)
 	else
 	{
 		SecondDegreeEquation e = SecondDegreeEquation(p.getFactor(2), p.getFactor(1), p.getFactor(0));
-		std::cout << "Discriminant : " << e.getDelta() << std::endl;
+		std::cout << "Discriminant: " << e.getDelta();
+		if (e.getDelta() == 0)
+			std::cout << " (There is one real solution)" << std::endl;
+		else if (e.getDelta() > 0)
+			std::cout << " (There are two real solutions)" << std::endl;
+		else
+			std::cout << " (There are two complex solutions)" << std::endl;
 		e.solve();
 	}
 	return (0);

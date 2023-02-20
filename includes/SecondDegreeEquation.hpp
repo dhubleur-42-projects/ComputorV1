@@ -14,6 +14,7 @@
 #define SecondDegreeEquation_HPP
 
 # include <iostream>
+# include "math.hpp"
 
 class SecondDegreeEquation
 {

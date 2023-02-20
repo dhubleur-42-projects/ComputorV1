@@ -2,6 +2,7 @@ NAME		=	computor
 
 SRCS		=	main.cpp \
 				basic.cpp \
+				math.cpp \
 				$(addprefix classes/, \
 					Polynom.cpp \
 					SecondDegreeEquation.cpp \

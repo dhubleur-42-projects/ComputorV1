@@ -6,10 +6,11 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:12:30 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 17:14:39 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:46:21 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sstream>
 #include "math.hpp"
 
 double squareRoot(double n)
@@ -22,4 +23,40 @@ double squareRoot(double n)
             y = n / x;
         }
         return x;
+}
+
+bool isInteger(double n)
+{
+	return (n == (int)n);
+}
+
+std::string asString(double n)
+{
+	std::stringstream ss;
+	ss << n;
+	return (ss.str());
+}
+
+std::string getAsIrreductibleIfEntire(double n, double divider)
+{
+	if (!isInteger(n) || !isInteger(divider))
+	{
+		const double res = n / divider;
+		return (asString(res));
+	}
+	else
+	{
+		int factor = 2;
+		while (factor <= n || factor <= divider) {
+			while (isInteger(n / factor) && isInteger(divider / factor))
+			{
+				n /= factor;
+				divider /= factor;
+			}
+			factor++;
+		}
+		if (isInteger(n/divider))
+			return (asString(n / divider));
+		return (asString(n) + "/" + asString(divider));
+	}
 }

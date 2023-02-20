@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 16:19:33 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:49:37 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ void Polynom::reduce()
 
 int Polynom::getDegree() const { return _degree; }
 
-int Polynom::getFactor(int degree) const {
+double Polynom::getFactor(int degree) const {
 	auto search = std::find_if(_factors.begin(), _factors.end(), [degree](std::pair<double, double> test)
 							   { return (test.second == degree); });
 	if (search == _factors.end())

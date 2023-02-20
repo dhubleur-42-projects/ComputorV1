@@ -19,7 +19,7 @@
 class SecondDegreeEquation
 {
 public:
-	SecondDegreeEquation(int a, int b, int c);
+	SecondDegreeEquation(double a, double b, double c);
 	SecondDegreeEquation(SecondDegreeEquation const &src);
 	~SecondDegreeEquation();
 

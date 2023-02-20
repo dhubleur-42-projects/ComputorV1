@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:43:45 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 16:17:22 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:49:31 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	void print() const;
 	void reduce();
 	int getDegree() const;
-	int getFactor(int degree) const;
+	double getFactor(int degree) const;
 
 private:
 	std::vector<std::pair<double, double>>

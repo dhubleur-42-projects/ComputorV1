@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/21 18:08:44 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:14:04 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,13 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 		size_t mult = factor.find("*");
 		if (mult == std::string::npos)
 		{
-			_extractValue(factor, values);
+			if (factor.length() < 1)
+			{
+				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				_valid = false;
+			}
+			else
+				_extractValue(factor, values);
 		}
 		else
 		{
@@ -93,17 +99,25 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
 				_valid = false;
 			}
-			if (factor[0] == '-' && factor[mult + 1] == '-')
+			else if (factor[0] == '-' && factor[mult + 1] == '-')
 			{
 				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
 				_valid = false;
 			}
-			int part1 = _extractValue(factor.substr(0, mult), values);
-			int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
-			if (part1 == part2)
+			else if(factor.substr(0, mult).length() < 1 || factor.substr(mult + 1, factor.size() - mult - 1).length() < 1)
 			{
 				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
 				_valid = false;
+			}
+			else
+			{
+				int part1 = _extractValue(factor.substr(0, mult), values);
+				int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
+				if (part1 == part2)
+				{
+					std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+					_valid = false;
+				}
 			}
 		}
 	}

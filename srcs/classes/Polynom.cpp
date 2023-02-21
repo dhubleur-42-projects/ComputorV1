@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/21 13:28:38 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:29:50 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 {
 	std::pair<double, double> values(1, 0);
 	size_t x = factor.find("X");
-	if (x != std::string::npos && x != factor.size() - 1 && factor[x + 1] != '^')
+	if (x != std::string::npos && x != factor.size() - 1 && factor[x + 1] != '^' && factor[x + 1] != '*')
 	{
 		std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
 		_valid = false;

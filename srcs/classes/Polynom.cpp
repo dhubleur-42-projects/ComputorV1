@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 17:49:37 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:28:38 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,30 @@ int Polynom::_extractValue(std::string factor, std::pair<double, double> &values
 std::pair<double, double> Polynom::_extractValues(std::string &factor)
 {
 	std::pair<double, double> values(1, 0);
-	size_t mult = factor.find("*");
-	if (mult == std::string::npos)
+	size_t x = factor.find("X");
+	if (x != std::string::npos && x != factor.size() - 1 && factor[x + 1] != '^')
 	{
-		_extractValue(factor, values);
-	}
-	else
-	{
-		int part1 = _extractValue(factor.substr(0, mult), values);
-		int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
-		if (part1 == part2)
+		std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+		_valid = false;
+	}else {
+		if (x != std::string::npos && x != 0 && factor[x - 1] != '*')
 		{
-			std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
-			_valid = false;
+			factor = factor.substr(0, x) + "*" + factor.substr(x, factor.size() - x);
+		}
+		size_t mult = factor.find("*");
+		if (mult == std::string::npos)
+		{
+			_extractValue(factor, values);
+		}
+		else
+		{
+			int part1 = _extractValue(factor.substr(0, mult), values);
+			int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
+			if (part1 == part2)
+			{
+				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				_valid = false;
+			}
 		}
 	}
 	return (values);

@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/21 13:40:26 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:49:26 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 		std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
 		_valid = false;
 	}else {
-		if (x != std::string::npos && x != 0 && factor[x - 1] != '*')
+		if (x != std::string::npos && x != 0 && std::isdigit(factor[x - 1]))
 		{
 			factor = factor.substr(0, x) + "*" + factor.substr(x, factor.size() - x);
 		}
@@ -107,37 +107,29 @@ std::pair<double, double> Polynom::_extractFactor(std::string &factorsList)
 	size_t x = factorsList.find("X^");
 	if (x == std::string::npos)
 		x = factorsList.find("X");
-	if (x != std::string::npos && x > 0 && factorsList[x - 1] != '*')
+	if (x != std::string::npos && (plus == x + 2))
+		plus = std::string::npos;
+	else if (x != std::string::npos && (minus == x + 2))
+		minus = std::string::npos;
+	if (plus == std::string::npos && minus == std::string::npos)
 	{
-		std::cerr << "Invalid equation (invalid factor '" << factorsList << "')" << std::endl;
-		_valid = false;
+		factor = factorsList;
+		factorsList = "";
 	}
-	else {
-		if (x != std::string::npos && (plus == x + 2))
-			plus = std::string::npos;
-		else if (x != std::string::npos && (minus == x + 2))
-			minus = std::string::npos;
-		if (plus == std::string::npos && minus == std::string::npos)
+	else
+	{
+		if (plus == std::string::npos || minus < plus)
 		{
-			factor = factorsList;
-			factorsList = "";
+			factor = factorsList.substr(0, minus);
+			factorsList = factorsList.substr(minus, factorsList.size() - minus);
 		}
 		else
 		{
-			if (plus == std::string::npos || minus < plus)
-			{
-				factor = factorsList.substr(0, minus);
-				factorsList = factorsList.substr(minus, factorsList.size() - minus);
-			}
-			else
-			{
-				factor = factorsList.substr(0, plus);
-				factorsList = factorsList.substr(plus, factorsList.size() - plus);
-			}
+			factor = factorsList.substr(0, plus);
+			factorsList = factorsList.substr(plus, factorsList.size() - plus);
 		}
-		return (_extractValues(factor));
 	}
-	return (std::pair<double, double>(0, 0));
+	return (_extractValues(factor));
 }
 
 void Polynom::_testDegree()

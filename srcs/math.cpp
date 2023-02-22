@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:12:30 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 17:46:21 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:08:50 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ std::string getAsIrreductibleIfEntire(double n, double divider)
 		const double res = n / divider;
 		return (asString(res));
 	}
+	else if (n == 0)
+		return ("0");
+	else if (isInteger(n/divider))
+		return (asString(n / divider));
 	else
 	{
 		int factor = 2;
@@ -55,8 +59,6 @@ std::string getAsIrreductibleIfEntire(double n, double divider)
 			}
 			factor++;
 		}
-		if (isInteger(n/divider))
-			return (asString(n / divider));
 		return (asString(n) + "/" + asString(divider));
 	}
 }

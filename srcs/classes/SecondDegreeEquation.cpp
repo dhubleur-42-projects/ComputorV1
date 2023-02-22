@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "SecondDegreeEquation.hpp"
+#include "color.hpp"
 
 SecondDegreeEquation::SecondDegreeEquation(double a, double b, double c) : _a(a), _b(b), _c(c) {
-	std::cout << "We gonna use the Vieta's formulas to solve this equation. With this parameters: a=" << a << " | b=" << b << " | c=" << c << std::endl;
+	std::cout << CYAN << "We gonna use the Vieta's formulas to solve this equation. With this parameters: " << BOLD << "a=" << a << " | b=" << b << " | c=" << c << RESET << std::endl;
 	const int bSquare = b * b;
 	const int fourAC = 4 * a * c;
-	std::cout << "We can compute the discriminant with the following formula:" << std::endl;
-	std::cout << "delta = b^2 - 4ac  =>  delta = " << b << "^2 - 4 * " << a << " * " << c << "  =>  delta = " << bSquare << (fourAC < 0 ? " + " : " - ") << (fourAC < 0 ? -fourAC : fourAC) << std::endl;
+	std::cout << PURPLE << "We can compute the discriminant with the following formula:" << RESET << std::endl;
+	std::cout << YELLOW << "delta = b^2 - 4ac  =>  " << BOLD << "delta = " << b << "^2 - 4 * " << a << " * " << c << "  =>  delta = " << bSquare << (fourAC < 0 ? " + " : " - ") << (fourAC < 0 ? -fourAC : fourAC) << RESET << std::endl;
 	_delta = bSquare - fourAC;
 }
 
@@ -44,27 +45,27 @@ void SecondDegreeEquation::solve() const
 	if (_delta == 0)
 	{
 		std::string x = getAsIrreductibleIfEntire(-_b, 2 * _a);
-		std::cout << "The solution is: " << x << std::endl;
+		std::cout << GREEN << "The solution is: " << BOLD << x << RESET << std::endl;
 	}
 	else if (_delta > 0)
 	{
 		//Real solutions
 		double root = squareRoot(_delta);
-		std::cout << "Square root of the discriminant: " << root << std::endl;
-		std::cout << "We can compute the two solutions with the following formulas:" << std::endl;
-		std::cout << "x = (-b ± sqrt(delta)) / 2a  =>  x = (-" << _b << " ± " << root << ") / 2 * " << _a << std::endl;
+		std::cout << CYAN << "Square root of the discriminant: " << BOLD << root << RESET << std::endl;
+		std::cout << PURPLE << "We can compute the two solutions with the following formulas:" << RESET << std::endl;
+		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (-" << _b << " ± " << root << ") / 2 * " << _a << RESET << std::endl;
 		std::string x1 = getAsIrreductibleIfEntire(-_b + root, 2 * _a);
 		std::string x2 = getAsIrreductibleIfEntire(-_b - root, 2 * _a);
-		std::cout << "The solutions are: '" << x1 << "' and '" << x2 << "'" << std::endl;
+		std::cout << GREEN << "The solutions are: '" << BOLD << x1 << RESET << GREEN << "' and '" << BOLD << x2 << RESET << GREEN << "'" << std::endl;
 	}
 	else
 	{
 		//Complex solutions
 		double root = squareRoot(-_delta);
-		std::cout << "Square root of the discriminant: " << root << " * i" << std::endl;
-		std::cout << "We can compute the two solutions with the following formulas:" << std::endl;
-		std::cout << "x = (-b ± sqrt(delta)) / 2a  =>  x = (-" << _b << " ± " << root << " * i) / 2 * " << _a << std::endl;
+		std::cout << CYAN << "Square root of the discriminant: " << BOLD << root << " * i" << RESET << std::endl;
+		std::cout << PURPLE << "We can compute the two solutions with the following formulas:" << RESET << std::endl;
+		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (-" << _b << " ± " << root << " * i) / 2 * " << _a << RESET << std::endl;
 		const int doubleA = 2 * _a;
-		std::cout << "The solutions are: '" << getAsIrreductibleIfEntire(_b + root, doubleA) << " * i/" << doubleA << "' and '" << getAsIrreductibleIfEntire(_b - root, doubleA)  << " * i/" << doubleA << "'" << std::endl;
+		std::cout << GREEN << "The solutions are: '" << BOLD << getAsIrreductibleIfEntire(_b + root, doubleA) << " * i/" << doubleA << RESET << GREEN << "' and '" << BOLD << getAsIrreductibleIfEntire(_b - root, doubleA)  << " * i/" << doubleA << RESET << GREEN << "'" << std::endl;
 	}
 }

@@ -6,26 +6,27 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:13:58 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/20 17:47:18 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:00:35 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "basic.hpp"
+#include "color.hpp"
 
 void basicSolve(Polynom &p)
 {
 	if (p.getDegree() == 0)
 	{
 		if (p.getFactor(0) == 0)
-			std::cout << "All real numbers are solutions of the equation." << std::endl;
+			std::cout << GREEN << "All " << BOLD << "real numbers" << RESET << GREEN << " are solutions of the equation." << RESET << std::endl;
 		else
-			std::cout << "There is no solution to the equation." << std::endl;
+			std::cout << YELLOW << "There is " << BOLD << "no" << RESET << YELLOW << " solution to the equation." << RESET << std::endl;
 	}
 	else
 	{
-		std::cout << "There is one real solution and can be computed with the following formula:" << std::endl;
-		std::cout << "x = -b / a  =>  x = " << (p.getFactor(0) > 0 ? "-" : "") << (p.getFactor(0) < 0 ? - p.getFactor(0) : p.getFactor(0)) << " / " << p.getFactor(1) << std::endl;
+		std::cout << PURPLE << "There is " << BOLD << "one" << RESET << PURPLE << " real solution and can be computed with the following formula:" << RESET << std::endl;
+		std::cout << YELLOW << "x = -b / a  =>  " << BOLD << "x = " << (p.getFactor(0) > 0 ? "-" : "") << (p.getFactor(0) < 0 ? - p.getFactor(0) : p.getFactor(0)) << " / " << p.getFactor(1) << RESET << std::endl;
 		std::string x = getAsIrreductibleIfEntire(-p.getFactor(0), p.getFactor(1));
-		std::cout << "The solution is: " << x << std::endl;
+		std::cout << std::endl << GREEN << "The solution is: " << BOLD << x << RESET << std::endl;
 	}
 }

@@ -6,11 +6,12 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/21 18:14:04 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:52:58 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Polynom.hpp"
+#include "color.hpp"
 #include <iostream>
 #include <algorithm>
 
@@ -48,7 +49,7 @@ int Polynom::_extractValue(std::string factor, std::pair<double, double> &values
 											return (std::isdigit(c) ? true : false); });
 	if (!isNumber)
 	{
-		std::cerr << "Invalid equation ('" << nbr << "' is not a number)" << std::endl;
+		std::cerr << RED << "Invalid equation ('" << nbr << "' is not a number)" << RESET << std::endl;
 		_valid = false;
 		return -1;
 	}
@@ -73,7 +74,7 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 	size_t x = factor.find("X");
 	if (x != std::string::npos && x != factor.size() - 1 && factor[x + 1] != '^' && factor[x + 1] != '*')
 	{
-		std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+		std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 		_valid = false;
 	}else {
 		if (x != std::string::npos && x != 0 && std::isdigit(factor[x - 1]))
@@ -85,7 +86,7 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 		{
 			if (factor.length() < 1)
 			{
-				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 				_valid = false;
 			}
 			else
@@ -96,17 +97,17 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 			size_t mult2 = factor.substr(mult + 1, factor.size() - mult - 1).find("*");
 			if (mult2 != std::string::npos)
 			{
-				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 				_valid = false;
 			}
 			else if (factor[0] == '-' && factor[mult + 1] == '-')
 			{
-				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 				_valid = false;
 			}
 			else if(factor.substr(0, mult).length() < 1 || factor.substr(mult + 1, factor.size() - mult - 1).length() < 1)
 			{
-				std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+				std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 				_valid = false;
 			}
 			else
@@ -115,7 +116,7 @@ std::pair<double, double> Polynom::_extractValues(std::string &factor)
 				int part2 = _extractValue(factor.substr(mult + 1, factor.size() - mult - 1), values);
 				if (part1 == part2)
 				{
-					std::cerr << "Invalid equation (invalid factor '" << factor << "')" << std::endl;
+					std::cerr << RED << "Invalid equation (invalid factor '" << factor << "')" << RESET << std::endl;
 					_valid = false;
 				}
 			}
@@ -162,12 +163,12 @@ void Polynom::_testDegree()
 	if (_factors.back().second < 0)
 	{
 		_valid = false;
-		std::cerr << "Invalid equation (degree must be greater or equals than 0)" << std::endl;
+		std::cerr << RED << "Invalid equation (degree must be greater or equals than 0)" << RESET << std::endl;
 	}
 	if ((int)_factors.back().second != _factors.back().second)
 	{
 		_valid = false;
-		std::cerr << "Invalid equation (degree must be an integer)" << std::endl;
+		std::cerr << RED << "Invalid equation (degree must be an integer)" << RESET << std::endl;
 	}
 }
 
@@ -178,7 +179,7 @@ Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 	if (equal == std::string::npos)
 	{
 		_valid = false;
-		std::cerr << "Invalid equation (need a '=')" << std::endl;
+		std::cerr << RED << "Invalid equation (need a '=')" << RESET << std::endl;
 		return;
 	}
 	std::string left = equation.substr(0, equal);

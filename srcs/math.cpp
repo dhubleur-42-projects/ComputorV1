@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:12:30 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/22 17:08:50 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:06:22 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double squareRoot(double n)
 {
 	    double x = n;
         double y = 1;
-        double e = 0.000001; /* e decides the accuracy level*/
+        double e = 0.0000001;
         while (x - y > e) {
             x = (x + y) / 2;
             y = n / x;

@@ -66,6 +66,6 @@ void SecondDegreeEquation::solve() const
 		std::cout << PURPLE << "We can compute the two solutions with the following formulas:" << RESET << std::endl;
 		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (-" << _b << " ± " << root << " * i) / 2 * " << _a << RESET << std::endl;
 		const int doubleA = 2 * _a;
-		std::cout << GREEN << "The solutions are: '" << BOLD << getAsIrreductibleIfEntire(_b + root, doubleA) << " * i/" << doubleA << RESET << GREEN << "' and '" << BOLD << getAsIrreductibleIfEntire(_b - root, doubleA)  << " * i/" << doubleA << RESET << GREEN << "'" << std::endl;
+		std::cout << GREEN << "The solutions are: '" << BOLD << getAsIrreductibleIfEntire(_b + root, doubleA) << " * i" << RESET << GREEN << "' and '" << BOLD << getAsIrreductibleIfEntire(_b - root, doubleA)  << " * i" << RESET << GREEN << "'" << std::endl;
 	}
 }

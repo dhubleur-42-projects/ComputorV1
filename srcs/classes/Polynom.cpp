@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/03/06 13:24:22 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:28:47 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,12 @@ Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 	}
 	std::string left = equation.substr(0, equal);
 	std::string right = equation.substr(equal + 1, equation.size() - equal - 1);
+	if (left.size() <= 0 || right.size() <= 0)
+	{
+		_valid = false;
+		std::cerr << RED << "Invalid equation (need a factor on each side of the '=')" << RESET << std::endl;
+		return;
+	}
 	while (left.size() > 0)
 	{
 		std::pair<double, double> factor = _extractFactor(left);

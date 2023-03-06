@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/03/06 13:28:47 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:31:51 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void Polynom::_testDegree()
 Polynom::Polynom(std::string equation) : _valid(true), _degree(-1)
 {
 	equation.erase(std::remove(equation.begin(), equation.end(), ' '), equation.end());
+	std::transform(equation.begin(), equation.end(), equation.begin(), ::toupper);
 	size_t equal = equation.find("=");
 	if (equal == std::string::npos)
 	{

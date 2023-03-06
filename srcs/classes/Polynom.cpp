@@ -6,7 +6,7 @@
 /*   By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:44:05 by dhubleur          #+#    #+#             */
-/*   Updated: 2023/02/22 17:52:58 by dhubleur         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:24:22 by dhubleur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int Polynom::_extractValue(std::string factor, std::pair<double, double> &values
 	size_t pos = 0;
 	if (nbr[0] == '-' || nbr[0] == '+')
 		pos++;
+	if (pos == nbr.size())
+	{
+		std::cerr << RED << "Invalid equation ('" << nbr << "' is not a number)" << RESET << std::endl;
+		_valid = false;
+		return -1;
+	}
 	bool point = false;
 	bool isNumber = std::ranges::all_of(nbr.begin() + pos, nbr.end(), [point](char c) mutable
 										{

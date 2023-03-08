@@ -53,7 +53,7 @@ void SecondDegreeEquation::solve() const
 		double root = squareRoot(_delta);
 		std::cout << CYAN << "Square root of the discriminant: " << BOLD << root << RESET << std::endl;
 		std::cout << PURPLE << "We can compute the two solutions with the following formulas:" << RESET << std::endl;
-		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (-" << _b << " ± " << root << ") / 2 * " << _a << RESET << std::endl;
+		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (" << -_b << " ± " << root << ") / 2 * " << _a << RESET << std::endl;
 		std::string x1 = getAsIrreductibleIfEntire(-_b + root, 2 * _a);
 		std::string x2 = getAsIrreductibleIfEntire(-_b - root, 2 * _a);
 		std::cout << GREEN << "The solutions are: '" << BOLD << x1 << RESET << GREEN << "' and '" << BOLD << x2 << RESET << GREEN << "'" << std::endl;
@@ -64,8 +64,8 @@ void SecondDegreeEquation::solve() const
 		double root = squareRoot(-_delta);
 		std::cout << CYAN << "Square root of the discriminant: " << BOLD << root << " * i" << RESET << std::endl;
 		std::cout << PURPLE << "We can compute the two solutions with the following formulas:" << RESET << std::endl;
-		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (-" << _b << " ± " << root << " * i) / 2 * " << _a << RESET << std::endl;
-		const int doubleA = 2 * _a;
-		std::cout << GREEN << "The solutions are: '" << BOLD << getAsIrreductibleIfEntire(_b + root, doubleA) << " * i" << RESET << GREEN << "' and '" << BOLD << getAsIrreductibleIfEntire(_b - root, doubleA)  << " * i" << RESET << GREEN << "'" << std::endl;
+		std::cout << YELLOW << "x = (-b ± sqrt(delta)) / 2a  =>  " << BOLD << "x = (" << -_b << " ± " << root << " * i) / 2 * " << _a << RESET << std::endl;
+		const double doubleA = 2 * _a;
+		std::cout << GREEN << "The solutions are: '" << BOLD << getAsIrreductibleIfEntire(-_b, doubleA) << " + " << getAsIrreductibleIfEntire(root, doubleA) << " * i" << RESET << GREEN << "' and '" << BOLD << getAsIrreductibleIfEntire(-_b, doubleA) << " - " << getAsIrreductibleIfEntire(root, doubleA) << " * i" << RESET << GREEN << "'" << std::endl;
 	}
 }

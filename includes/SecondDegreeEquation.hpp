@@ -31,9 +31,9 @@ public:
 
 private:
 	SecondDegreeEquation();
-	int _a;
-	int _b;
-	int _c;
+	double _a;
+	double _b;
+	double _c;
 	double _delta;
 };
 
